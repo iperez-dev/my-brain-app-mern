@@ -5,7 +5,7 @@ function Navbar() {
   return (
     <header>
       <div className="container">
-        <Link to="/"><h1>My Brain</h1></Link>
+        <Link to="/"><h1>My brain app</h1></Link>
       </div>
     </header>
   )

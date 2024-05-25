@@ -1,9 +1,8 @@
-import React from 'react'
-// import { useState, useEffect } from "react"
-import WorkoutCard from "../components/WorkoutCard"
-import WorkoutForm from "../components/WorkoutForm"
+import MemoryCard from "../components/MemoryCard"
+import MemoryForm from "../components/MemoryForm"
 import { useContext } from 'react';
 import { GlobalContext } from "../context/globalContext"
+
 
 function Home() {
     
@@ -14,11 +13,12 @@ function Home() {
             <div className="workouts">
                 {
                     workouts.map(workout => (
-                        < WorkoutCard key={workout._id} workout={workout}  />
+                        < MemoryCard key={workout._id} workout={workout}  />
                     ))
                 }
             </div>
-            <WorkoutForm />
+            <MemoryForm />
+            
         </div>
     )
 }

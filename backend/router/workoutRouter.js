@@ -1,5 +1,6 @@
 const express = require('express')
-// const Workout = require('../model/workoutModel')
+const upload = require('../middleware/multer')
+
 const {
     getWorkouts,
     getWorkout,
@@ -19,7 +20,7 @@ router.get('/', getWorkouts)
 router.get('/:id', getWorkout)
 
 //POST a single workouts
-router.post('/', createWorkout)
+router.post('/', upload.single("image"), createWorkout)
 
 //DELETE a single workouts
 router.delete('/:id', deleteWorkout)

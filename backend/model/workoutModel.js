@@ -7,13 +7,29 @@ const workoutSchema = new Schema ({
         type: String,
         require: true
     },
-    description: {
+    stack: {
+        type: String,
+        require: true
+    },
+    features: {
         type: String,
         require: true
     },
     url: {
         type: String,
         require: true
+    },
+    githubUrl: {
+        type: String,
+        require: true
+    },
+    cloudinaryId: {
+        type: String,
+        require: true,
+    },
+    image: {
+        type: String,
+        require: true,
     }
 }, { timestamps: true })
 

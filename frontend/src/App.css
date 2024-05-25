@@ -45,6 +45,8 @@ header a {
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  display: grid;
+  grid-template-columns: 1.5fr 3fr;
 }
 .workout-details h4 {
   margin: 0 0 10px 0;
@@ -99,4 +101,17 @@ div.error {
 }
 input.error {
   border: 1px solid var(--error);
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.search-bar{
+  display: flex;
+  align-items: center;
+}
+.card-image {
+  width: 100%;
+  max-width: 280px;
+  height: auto; /* Maintain aspect ratio */
 }
