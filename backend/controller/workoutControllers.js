@@ -5,11 +5,7 @@ const cloudinary = require("../middleware/cloudinary")
 
 //GET all workouts - find
 const getWorkouts = async (req, res) => {
-
-  //GET ALL
-
   const workouts = await Workout.find().sort({ createdAt: -1 });
-
   try {
     res.status(200).json(workouts);
   } catch (error) {
@@ -20,15 +16,10 @@ const getWorkouts = async (req, res) => {
 //GET SINGLE
 const getWorkout = async (req, res) => {
   const { id } = req.params;
-
-  //mongoose error
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No workout found" });
   }
-
   const workout = await Workout.findById(id);
-
-  //response
   if (!workout) {
     return res.status(404).json({ error: "No workout found" });
   }
@@ -37,16 +28,11 @@ const getWorkout = async (req, res) => {
 
 //POST 
 const createWorkout = async (req, res) => {
-
   try {
-
-    // Check if file is uploaded
     if (!req.file) {
       return res.status(400).json({ error: 'No file uploaded' });
     }
-    // Upload image to cloudinary
     const result = await cloudinary.uploader.upload(req.file.path);
-
     const workout = await Workout.create({
       name: req.body.name,
       stack: req.body.stack,
@@ -64,42 +50,30 @@ const createWorkout = async (req, res) => {
   }
 };
 
-//DELETE a single workouts - findOneAndDelete
+//DELETE
 const deleteWorkout = async (req, res) => {
   const { id } = req.params;
-
-  //mongoose error
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: error.message })
   }
-
   const workout = await Workout.findOneAndDelete({ _id: id })
-
   if (!workout) {
     res.status(404).json({ error: "workout not found" })
   }
   res.status(200).json({ workout })
 };
 
-//PATCH a single workouts - findOneAndUpdate
+//UPDATE
 const updateWorkout = async (req, res) => {
   const { id } = req.params
-
-  //mongoose error
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No workout found" })
   }
-
   const workout = await Workout.findOneAndUpdate({ _id: id }, { ...req.body })
-
-  //response
   if (!workout) {
     return res.status(404).json({ error: "No workout found" })
   }
   res.status(200).json({ workout })
-
-
-
 };
 
 module.exports = {

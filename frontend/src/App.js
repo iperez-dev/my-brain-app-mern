@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import GlobalState from "./context/globalContext"
 import Navbar from "./components/Navbar"
 import Home from "./pages/Home"
-import Search from "./pages/Search"
 
 function App() {
 
@@ -15,7 +14,6 @@ function App() {
           <div className="pages">
             <Routes>
               <Route path='/' element={< Home />} />
-              <Route path='/search' element={< Search />} />
             </Routes>
           </div>
         </BrowserRouter>

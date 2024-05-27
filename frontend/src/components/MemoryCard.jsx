@@ -3,7 +3,8 @@ import { useContext } from 'react'
 import { GlobalContext } from '../context/globalContext'
 
 function MemoryCard({ workout }) {
-  const { setWorkouts } = useContext(GlobalContext)
+  const { setWorkouts, result } = useContext(GlobalContext)
+
 
   //DELETE
   const deleteWorkout = async (id) => {
@@ -18,7 +19,7 @@ function MemoryCard({ workout }) {
         throw new Error(json.error);
       }
     } catch (error) {
-      throw new Error("Error deleting workout: " + error.message)
+      console.error("Error deleting workout:", error);
     }
   }
 
@@ -29,6 +30,7 @@ function MemoryCard({ workout }) {
       console.log('Failed to delete workout:', error)
     }
   }
+  ///
 
   return (
     <div className="workout-details">
@@ -41,9 +43,8 @@ function MemoryCard({ workout }) {
         <p><strong>Notes: </strong>{workout.features}</p>
         <p><a href={workout.githubUrl} target="_blank"><strong>GitHub</strong></a></p>
         <p>{workout.createdAt}</p>
-        <span className='material-symbols-outlined' onClick={handleClick}>delete</span>
+        <span className='material-symbols-outlined' onClick={ handleClick }>delete</span>
       </div>
-
     </div>
   )
 }

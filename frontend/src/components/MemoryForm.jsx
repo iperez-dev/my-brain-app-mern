@@ -1,6 +1,6 @@
-import React from 'react'
 import { useContext, useState } from 'react';
 import { GlobalContext } from "../context/globalContext"
+import SearchBar from "../components/SearchBar"
 
 function MemoryForm() {
     const [name, setName] = useState('')
@@ -31,12 +31,12 @@ function MemoryForm() {
                 method: "POST",
                 body: formData,
             })
+            
             if (!response.ok) {
                 const json = await response.json();
-                throw new Error("Network response error" + json.error)
+                throw new Error(json.error || "Network response error")
             }
             const json = await response.json()
-
             if (response.ok) {
                 setName('')
                 setUrl('')
@@ -54,7 +54,8 @@ function MemoryForm() {
     }
 
     return (
-
+        <>
+        
         <form className='create' onSubmit={createWorkout} >
             <div className="form">
                 <h3>Add to My Brain</h3>
@@ -107,11 +108,11 @@ function MemoryForm() {
                     onChange={(e) => setImage(e.target.files[0])}
                     className={emptyFields.includes('image') ? 'error' : " "}
                 />
-
                 <button type='submit'>Add Workout</button>
                 {error && <div className='error'>{error}</div>}
             </div>
         </form>
+        </>
     )
 }
 

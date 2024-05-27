@@ -1,9 +1,12 @@
 import { createContext, useState, useEffect } from 'react'
 
+
 export const GlobalContext = createContext(null)
 
 export default function GlobalState({ children }) {
     const [workouts, setWorkouts] = useState([])
+    const [query, setQuery] = useState("")
+   
 
     // GET ALL
     useEffect(() => {
@@ -22,11 +25,19 @@ export default function GlobalState({ children }) {
         fetchWorkouts()
     }, [])
 
+
+    //SEARCH
+        const handleInputChange = event => {
+        setQuery(event.target.value);
+    }
+
     return (
         <GlobalContext.Provider
             value={{
                 workouts,
                 setWorkouts,
+                handleInputChange,
+                query,
             }}
         >
             {children}
