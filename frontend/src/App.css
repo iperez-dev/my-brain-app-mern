@@ -115,3 +115,17 @@ a {
   max-width: 280px;
   height: auto; /* Maintain aspect ratio */
 }
+/* Memory Card */
+.memory-card {
+  background: #fff;
+  border-radius: 4px;
+  margin: 20px auto;
+  padding: 3rem;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+.memory-image {
+  width: 100%;
+  max-width: 1080px;
+  height: auto; /* Maintain aspect ratio */
+}
