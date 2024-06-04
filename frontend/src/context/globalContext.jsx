@@ -6,7 +6,7 @@ export const GlobalContext = createContext(null)
 export default function GlobalState({ children }) {
     const [workouts, setWorkouts] = useState([])
     const [query, setQuery] = useState("")
-   
+
 
     // GET ALL
     useEffect(() => {
@@ -26,8 +26,8 @@ export default function GlobalState({ children }) {
     }, [])
 
 
-    //SEARCH
-        const handleInputChange = event => {
+    //SET QUERY VALUE
+    const handleInputChange = event => {
         setQuery(event.target.value);
     }
 

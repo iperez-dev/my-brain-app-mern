@@ -1,10 +1,12 @@
 import React from 'react'
 import { useContext } from 'react'
 import { GlobalContext } from '../context/globalContext'
+import { Link } from "react-router-dom"
 
-function MemoryCard({ workout }) {
-  const { setWorkouts, result } = useContext(GlobalContext)
+function MemoryCard({ name, stack, features, url, githubUrl, image, createdAt, _id }) {
+  const { setWorkouts } = useContext(GlobalContext)
 
+  console.log('MemoryCard id:', _id)
 
   //DELETE
   const deleteWorkout = async (id) => {
@@ -25,24 +27,24 @@ function MemoryCard({ workout }) {
 
   const handleClick = async () => {
     try {
-      await deleteWorkout(workout._id)
+      await deleteWorkout(_id)
     } catch (error) {
       console.log('Failed to delete workout:', error)
     }
   }
-  ///
+ 
 
   return (
     <div className="workout-details">
       <div >
-        <a href={workout.url} target="_blank"><img className="card-image" src={workout.image} alt={workout.name} /></a>
+        <Link to={`${_id}`}>  <img className="card-image" src={image} alt={name} /> </Link>
       </div>
       <div className="card-description">
-        <h4><a href={workout.url} target="_blank">{workout.name}</a></h4>
-        <p><strong>Stack: </strong>{workout.stack}</p>
-        <p><strong>Notes: </strong>{workout.features}</p>
-        <p><a href={workout.githubUrl} target="_blank"><strong>GitHub</strong></a></p>
-        <p>{workout.createdAt}</p>
+        <Link to={url} target='_blank'><h4>{name}</h4></Link>
+        <p><strong>Stack: </strong>{stack}</p>
+        <p><strong>Notes: </strong>{features}</p>
+        <p><a href={githubUrl} target="_blank"><strong>GitHub</strong></a></p>
+        <p>{createdAt}</p>
         <span className='material-symbols-outlined' onClick={ handleClick }>delete</span>
       </div>
     </div>

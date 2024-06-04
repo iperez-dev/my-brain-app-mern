@@ -1,6 +1,5 @@
 import { useContext, useState } from 'react';
 import { GlobalContext } from "../context/globalContext"
-import SearchBar from "../components/SearchBar"
 
 function MemoryForm() {
     const [name, setName] = useState('')
