@@ -24,14 +24,32 @@ const Memory = () => {
     handleMemoryList()
   }, [id])
 
+  // Extract video ID from the YouTube URL if available
+  const videoUrl = memoryData.url || '';
+  const videoId = videoUrl.split('v=')[1]?.split('&')[0];
+  const embedUrl = videoId ? `https://www.youtube.com/embed/${videoId}?si=piiS521f9WOa51PA` : '';
+
 
   return (
     <div className='home' >
       <div className="workouts">
         <div className='memory-card' >
-          <Link to={memoryData.url} target='_blank'><img className='memory-image' src={memoryData.image} alt={memoryData.name} /> </Link>
-         
-          {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/lfm_Hu0hEms?si=piiS521f9WOa51PA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> */}
+          
+          {embedUrl && (
+            <div className='video-wrapper'>
+            <iframe
+              // width='560'
+              // height='315'
+              src={embedUrl}
+              title='YouTube video player'
+              // frameBorder='0'
+              allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+              referrerPolicy='strict-origin-when-cross-origin'
+              allowFullScreen
+            ></iframe>
+            </div>
+          )}
+
           <h2>{memoryData.name}</h2>
           <p> <strong>Stack: </strong> {memoryData.stack}</p>
           <p><strong>Notes: </strong> {memoryData.features}</p>

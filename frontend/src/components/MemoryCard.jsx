@@ -40,7 +40,7 @@ function MemoryCard({ name, stack, features, url, githubUrl, image, createdAt, _
         <Link to={`${_id}`}>  <img className="card-image" src={image} alt={name} /> </Link>
       </div>
       <div className="card-description">
-        <Link to={url} target='_blank'><h4>{name}</h4></Link>
+        <Link to={`${_id}`}><h4>{name}</h4></Link>
         <p><strong>Stack: </strong>{stack}</p>
         <p><strong>Notes: </strong>{features}</p>
         <p><a href={githubUrl} target="_blank"><strong>GitHub</strong></a></p>
