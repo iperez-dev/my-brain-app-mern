@@ -2,6 +2,8 @@ import React from 'react'
 import { useContext } from 'react'
 import { GlobalContext } from '../context/globalContext'
 import { Link } from "react-router-dom"
+import { formatDistance } from "date-fns";
+
 
 function MemoryCard({ name, stack, features, url, githubUrl, image, createdAt, _id }) {
   const { setWorkouts } = useContext(GlobalContext)
@@ -44,7 +46,7 @@ function MemoryCard({ name, stack, features, url, githubUrl, image, createdAt, _
         <p><strong>Stack: </strong>{stack}</p>
         <p><strong>Notes: </strong>{features}</p>
         <p><a href={githubUrl} target="_blank"><strong>GitHub</strong></a></p>
-        <p>{createdAt}</p>
+        <p>{formatDistance(new Date(createdAt), new Date(), { addSuffix: true })}</p>
         <span className='material-symbols-outlined' onClick={ handleClick }>delete</span>
       </div>
     </div>
