@@ -25,8 +25,8 @@ router.post('/', upload.single("image"), createWorkout)
 //DELETE a single workouts
 router.delete('/:id', deleteWorkout)
 
-//PATCH a single workouts
-router.patch('/:id', updateWorkout)
+//PUT a single workouts
+router.put('/:id', updateWorkout)
 
 
 module.exports = router
