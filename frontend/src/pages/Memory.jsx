@@ -54,7 +54,6 @@ const Memory = () => {
           <p> <strong>Stack: </strong> {memoryData.stack}</p>
           <p><strong>Notes: </strong> {memoryData.features}</p>
           <Link to={memoryData.githubUrl} target='_blank'><strong>Github </strong></Link>
-          {/* <p>{formatDistance(new Date(memoryData.createdAt), new Date(), { addSuffix: true })}</p> */}
           <p>{formattedDate}</p>
           <div className='card-description' >
           </div>

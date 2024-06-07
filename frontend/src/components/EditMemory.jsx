@@ -56,7 +56,7 @@ function MemoryForm() {
 
     return (
         <>
-        <form className='create' onSubmit={updateWorkout} >
+        <form className='create'  onSubmit={updateWorkout} >
             <div className="form">
                 <h3>Edit Memory</h3>
 
