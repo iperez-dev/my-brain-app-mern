@@ -69,6 +69,7 @@ header a {
   color: #333;
 }
 
+
 /* new workout form */
 label, input {
   display: block;
@@ -115,6 +116,26 @@ a {
   max-width: 280px;
   height: auto; /* Maintain aspect ratio */
 }
+
+/* navbar */
+nav {
+  display: flex;
+  align-items: center;
+}
+nav a {
+  margin-left: 10px;
+}
+nav button {
+  background: #fff;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: "Poppins";
+  cursor: pointer;
+  font-size: 1em;
+}
+
 /* Memory Card */
 .memory-card {
   background: #fff;
@@ -146,4 +167,23 @@ a {
   width: 100%;
   height: 100%;
   border: 0;
+}
+/* auth forms */
+form.signup, form.login {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 4px;
+}
+
+nav button {
+  background: #fff;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-family: "Poppins";
+  cursor: pointer;
+  font-size: 1em;
 }
