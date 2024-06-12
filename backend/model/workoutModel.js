@@ -30,6 +30,10 @@ const workoutSchema = new Schema ({
     image: {
         type: String,
         require: true,
+    },
+    user_id: {
+        type: String,
+        require: true
     }
 }, { timestamps: true })
 

@@ -1,13 +1,6 @@
 import { createContext, useState, useEffect } from 'react'
 import { useAuthContext } from "../hooks/useAuthContext";
 
-// components
-import MemoryCard from "../components/MemoryCard"
-import MemoryForm from "../components/MemoryForm"
-
-
-
-
 export const GlobalContext = createContext(null)
 
 export default function GlobalState({ children }) {

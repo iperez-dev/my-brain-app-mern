@@ -3,9 +3,11 @@ const mongoose = require("mongoose");
 const Workout = require("../model/workoutModel");
 const cloudinary = require("../middleware/cloudinary")
 
-//GET all workouts - find
+//GET - get all workouts - find()
 const getWorkouts = async (req, res) => {
-  const workouts = await Workout.find().sort({ createdAt: -1 });
+  const user_id = req.user._id
+
+  const workouts = await Workout.find({ user_id }).sort({ createdAt: -1 });
   try {
     res.status(200).json(workouts);
   } catch (error) {
@@ -13,7 +15,7 @@ const getWorkouts = async (req, res) => {
   }
 };
 
-//GET SINGLE
+//GET - get single workout - findById()
 const getWorkout = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -26,21 +28,24 @@ const getWorkout = async (req, res) => {
   res.status(200).json(workout);
 };
 
-//POST 
+//POST - create workout - create()
 const createWorkout = async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ error: 'No file uploaded' });
     }
     const result = await cloudinary.uploader.upload(req.file.path);
+    // const user_id = req.user._id
     const workout = await Workout.create({
       name: req.body.name,
       stack: req.body.stack,
       features: req.body.features,
       url: req.body.url,
+      user_id: req.user._id,
       githubUrl: req.body.githubUrl,
       image: result.secure_url,
       cloudinaryId: result.public_id,
+      
     })
     res.status(200).json(workout);
     console.log(workout);
@@ -50,7 +55,7 @@ const createWorkout = async (req, res) => {
   }
 };
 
-//DELETE
+//DELETE - delete workout - findOneAndDelete()
 const deleteWorkout = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
