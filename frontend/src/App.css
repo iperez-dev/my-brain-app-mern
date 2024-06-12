@@ -177,6 +177,7 @@ form.signup, form.login {
   border-radius: 4px;
 }
 
+/* nav button */
 nav button {
   background: #fff;
   color: var(--primary);
@@ -186,4 +187,5 @@ nav button {
   font-family: "Poppins";
   cursor: pointer;
   font-size: 1em;
+  margin-left: 10px;
 }
