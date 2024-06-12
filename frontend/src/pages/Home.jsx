@@ -7,6 +7,7 @@ import Sidebar from "../components/sidebar/Sidebar"
 function Home() {
     
     const { workouts, query } = useContext(GlobalContext)
+   
 
     //SEARCH
     const filteredProducts = query 

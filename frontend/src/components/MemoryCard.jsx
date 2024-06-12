@@ -3,18 +3,28 @@ import { useContext } from 'react'
 import { GlobalContext } from '../context/globalContext'
 import { Link } from "react-router-dom"
 import { formatDistance } from "date-fns";
+import { useAuthContext } from '../hooks/useAuthContext';
 
 
 function MemoryCard({ name, stack, features, url, githubUrl, image, createdAt, _id }) {
   const { setWorkouts } = useContext(GlobalContext)
+  const { user } = useAuthContext()
 
   console.log('MemoryCard id:', _id)
 
   //DELETE
   const deleteWorkout = async (id) => {
+
+    if (!user) {
+      return
+  }
+  
     try {
       const response = await fetch(`http://localhost:8000/api/workouts/${id}`, {
         method: "DELETE",
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+      }
       })
       if (response.ok) {
         setWorkouts((prevWorkouts) => prevWorkouts.filter((workout) => workout._id !== id));

@@ -3,16 +3,27 @@ import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
 import EditBar from "../components/sidebar/EditBar"
 import { formatDistance } from "date-fns";
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const Memory = () => {
   const [memoryData, setMemoryData] = useState([])
   const { id } = useParams()
+  const { user } = useAuthContext()
 
   useEffect(() => {
     const handleMemoryList = async () => {
 
+      if (!user) {
+        return
+    }
+
       try {
-        const response = await fetch(`http://localhost:8000/api/workouts/${id}`)
+        const response = await fetch(`http://localhost:8000/api/workouts/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${user.token}`
+        },
+        })
         const data = await response.json()
         setMemoryData(data)
 

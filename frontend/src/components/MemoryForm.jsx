@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import { GlobalContext } from "../context/globalContext"
+import { useAuthContext } from '../hooks/useAuthContext';
 
 function MemoryForm() {
     const [name, setName] = useState('')
@@ -10,12 +11,18 @@ function MemoryForm() {
     const [image, setImage] = useState(null)
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
+    const { user } = useAuthContext()
 
     const { workouts, setWorkouts } = useContext(GlobalContext)
 
     //POST
     const createWorkout = async (e) => {
         e.preventDefault()
+
+        if (!user) {
+            setError('You must be logged in')
+            return
+        }
 
         try {
             const formData = new FormData();
@@ -29,6 +36,9 @@ function MemoryForm() {
             const response = await fetch('http://localhost:8000/api/workouts', {
                 method: "POST",
                 body: formData,
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
             })
             
             if (!response.ok) {
