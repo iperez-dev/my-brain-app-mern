@@ -3,25 +3,25 @@ import { createContext, useState, useEffect } from 'react'
 export const GlobalContext = createContext(null)
 
 export default function GlobalState({ children }) {
-    const [workouts, setWorkouts] = useState([])
+    const [memories, setMemories] = useState([])
     const [query, setQuery] = useState("")
 
 
     // GET ALL
     useEffect(() => {
-        const fetchWorkouts = async () => {
+        const fetchMemories = async () => {
             try {
                 const response = await fetch("http://localhost:8000/api/memories")
                 if (!response.ok) {
                     throw new Error("Network response error" + json.error)
                 }
                 const json = await response.json()
-                setWorkouts(json)
+                setMemories(json)
             } catch (error) {
-                throw new Error("Network error fetching workouts: " + error.message)
+                throw new Error("Network error fetching Memories: " + error.message)
             }
         }
-        fetchWorkouts()
+        fetchMemories()
         
         
     }, [])
@@ -35,8 +35,8 @@ export default function GlobalState({ children }) {
     return (
         <GlobalContext.Provider
             value={{
-                workouts,
-                setWorkouts,
+                memories,
+                setMemories,
                 handleInputChange,
                 query,
             }}

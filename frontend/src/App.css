@@ -38,7 +38,7 @@ header a {
   grid-template-columns: 3fr 1fr;
   gap: 100px;
 }
-.workout-details {
+.memory-details {
   background: #fff;
   border-radius: 4px;
   margin: 20px auto;
@@ -48,17 +48,17 @@ header a {
   display: grid;
   grid-template-columns: 1.5fr 3fr;
 }
-.workout-details h4 {
+.memory-details h4 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
   color: var(--primary);
 }
-.workout-details p {
+.memory-details p {
   margin: 0;
   font-size: 0.9em;
   color: #555;
 }
-.workout-details span {
+.memory-details span {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -70,7 +70,7 @@ header a {
 }
 
 
-/* new workout form */
+/* new memory form */
 label, input {
   display: block;
 }

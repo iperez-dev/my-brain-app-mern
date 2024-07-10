@@ -6,12 +6,12 @@ import { formatDistance } from "date-fns";
 
 
 function MemoryCard({ name, stack, features, url, githubUrl, image, createdAt, _id }) {
-  const { setWorkouts } = useContext(GlobalContext)
+  const { setMemories } = useContext(GlobalContext)
 
   console.log('MemoryCard id:', _id)
 
   //DELETE
-  const deleteWorkout = async (id) => {
+  const deleteMemory = async (id) => {
 
     try {
       const response = await fetch(`http://localhost:8000/api/memories/${id}`, {
@@ -19,27 +19,27 @@ function MemoryCard({ name, stack, features, url, githubUrl, image, createdAt, _
         
       })
       if (response.ok) {
-        setWorkouts((prevWorkouts) => prevWorkouts.filter((workout) => workout._id !== id));
+        setMemories((prevMemories) => prevMemories.filter((memory) => memory._id !== id));
       } else {
         const json = await response.json();
         throw new Error(json.error);
       }
     } catch (error) {
-      console.error("Error deleting workout:", error);
+      console.error("Error deleting Memory:", error);
     }
   }
 
   const handleClick = async () => {
     try {
-      await deleteWorkout(_id)
+      await deleteMemory(_id)
     } catch (error) {
-      console.log('Failed to delete workout:', error)
+      console.log('Failed to delete Memory:', error)
     }
   }
  
 
   return (
-    <div className="workout-details">
+    <div className="memory-details">
       <div >
         <Link to={`${_id}`}>  <img className="card-image" src={image} alt={name} /> </Link>
       </div>

@@ -4,18 +4,18 @@ import { GlobalContext } from "../context/globalContext";
 import Sidebar from "../components/sidebar/Sidebar";
 
 function Home() {
-  const { workouts, query } = useContext(GlobalContext);
+  const { memories, query } = useContext(GlobalContext);
 
   //SEARCH
   const filteredProducts = query
-    ? workouts.filter((workout) =>
-        workout.stack.toLowerCase().includes(query.toLowerCase())
+    ? memories.filter((memory) =>
+        memory.stack.toLowerCase().includes(query.toLowerCase())
       )
-    : workouts;
+    : memories;
 
   return (
     <div className="home">
-      <div className="workouts">
+      <div >
         {filteredProducts.map(
           ({
             name,
@@ -40,7 +40,6 @@ function Home() {
             />
           )
         )}
-        ;
       </div>
       <Sidebar />
     </div>

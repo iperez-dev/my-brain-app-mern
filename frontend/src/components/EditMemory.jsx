@@ -8,10 +8,10 @@ function MemoryForm() {
     const [features, setFeatures] = useState('');
     const [error, setError] = useState(null);
     const [emptyFields, setEmptyFields] = useState([]);
-    const { workouts, setWorkouts } = useContext(GlobalContext);
+    const { memories, setMemories } = useContext(GlobalContext);
     const { id } = useParams();
 
-    const updateWorkout = async (e) => {
+    const updateMemory = async (e) => {
         // e.preventDefault();
 
          // Create an object to hold the fields to update
@@ -26,16 +26,16 @@ function MemoryForm() {
                 body: JSON.stringify(updatedFields)
             });
 
-            const updatedWorkout = await response.json();
+            const updatedMemory = await response.json();
 
-            // Update local state with the updated workout
-            const updatedWorkouts = workouts.map(workout => {
-                if (workout._id === updatedWorkout._id) {
-                    return updatedWorkout;
+            // Update local state with the updated Memory
+            const updatedMemories = memories.map(memory => {
+                if (memory._id === updatedMemory._id) {
+                    return updatedMemory;
                 }
-                return workout;
+                return memory;
             });
-            setWorkouts(updatedWorkouts);
+            setMemories(updatedMemories);
 
             // Reset form fields and error state
             setName('');
@@ -46,14 +46,14 @@ function MemoryForm() {
 
         } catch (error) {
             console.error('Update error:', error);
-            setError('Error updating workout: ' + error.message);
+            setError('Error updating Memory: ' + error.message);
         }
     }
 
 
     return (
         <>
-        <form className='create'  onSubmit={updateWorkout} >
+        <form className='create'  onSubmit={updateMemory} >
             <div className="form">
                 <h3>Edit Memory</h3>
 

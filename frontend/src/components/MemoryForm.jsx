@@ -11,10 +11,10 @@ function MemoryForm() {
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
 
-    const { workouts, setWorkouts } = useContext(GlobalContext)
+    const { memories, setMemories } = useContext(GlobalContext)
 
     //POST
-    const createWorkout = async (e) => {
+    const createMemory = async (e) => {
         e.preventDefault()
 
         try {
@@ -44,19 +44,19 @@ function MemoryForm() {
                 setFeatures('')
                 setGithubUrl('')
                 setImage(null)
-                setWorkouts([json, ...workouts]);
+                setMemories([json, ...memories]);
                 setEmptyFields([])
                 setError(null)
             }
         } catch (error) {
-            setError("Error creating workout: " + error.message)
+            setError("Error creating Memory: " + error.message)
         }
     }
 
     return (
         <>
         
-        <form className='create' onSubmit={createWorkout} >
+        <form className='create' onSubmit={createMemory} >
             <div className="form">
                 <h3>Add to My Brain</h3>
 
@@ -108,7 +108,7 @@ function MemoryForm() {
                     onChange={(e) => setImage(e.target.files[0])}
                     className={emptyFields.includes('image') ? 'error' : " "}
                 />
-                <button type='submit'>Add Workout</button>
+                <button type='submit'>Add Memory</button>
                 {error && <div className='error'>{error}</div>}
             </div>
         </form>
