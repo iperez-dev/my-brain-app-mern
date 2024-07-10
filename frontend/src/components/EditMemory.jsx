@@ -21,7 +21,7 @@ function MemoryForm() {
          if (features) updatedFields.features = features;
 
         try {
-            const response = await fetch(`http://localhost:8000/api/workouts/${id}`, {
+            const response = await fetch(`http://localhost:8000/api/memories/${id}`, {
                 method: "PUT",
                 body: JSON.stringify(updatedFields)
             });

@@ -14,7 +14,7 @@ function MemoryCard({ name, stack, features, url, githubUrl, image, createdAt, _
   const deleteWorkout = async (id) => {
 
     try {
-      const response = await fetch(`http://localhost:8000/api/workouts/${id}`, {
+      const response = await fetch(`http://localhost:8000/api/memories/${id}`, {
         method: "DELETE",
         
       })
