@@ -1,119 +1,122 @@
-import { useContext, useState } from 'react';
-import { GlobalContext } from "../context/globalContext"
+import { useContext, useState } from "react";
+import { GlobalContext } from "../context/globalContext";
 
 function MemoryForm() {
-    const [name, setName] = useState('')
-    const [url, setUrl] = useState('')
-    const [stack, setStack] = useState('')
-    const [features, setFeatures] = useState('')
-    const [githubUrl, setGithubUrl] = useState('')
-    const [image, setImage] = useState(null)
-    const [error, setError] = useState(null)
-    const [emptyFields, setEmptyFields] = useState([])
+  const [name, setName] = useState("");
+  const [url, setUrl] = useState("");
+  const [stack, setStack] = useState("");
+  const [features, setFeatures] = useState("");
+  const [githubUrl, setGithubUrl] = useState("");
+  const [image, setImage] = useState(null);
+  const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([]);
 
-    const { memories, setMemories } = useContext(GlobalContext)
+  const { memories, setMemories } = useContext(GlobalContext);
 
-    //POST
-    const createMemory = async (e) => {
-        e.preventDefault()
+  //POST
+  const createMemory = async (e) => {
+    e.preventDefault();
 
-        try {
-            const formData = new FormData();
-            formData.append('name', name);
-            formData.append('url', url);
-            formData.append('stack', stack);
-            formData.append('features', features);
-            formData.append('githubUrl', githubUrl);
-            if (image) { formData.append('image', image); }
+    try {
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("url", url);
+      formData.append("stack", stack);
+      formData.append("features", features);
+      formData.append("githubUrl", githubUrl);
+      if (image) {
+        formData.append("image", image);
+      }
 
-            const response = await fetch('http://localhost:8000/api/memories', {
-                method: "POST",
-                body: formData,
-                
-            })
-            
-            if (!response.ok) {
-                const json = await response.json();
-                throw new Error(json.error || "Network response error")
-            }
-            const json = await response.json()
-            if (response.ok) {
-                setName('')
-                setUrl('')
-                setStack('')
-                setFeatures('')
-                setGithubUrl('')
-                setImage(null)
-                setMemories([json, ...memories]);
-                setEmptyFields([])
-                setError(null)
-            }
-        } catch (error) {
-            setError("Error creating Memory: " + error.message)
-        }
+      const response = await fetch("http://localhost:8000/api/memories", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const json = await response.json();
+        throw new Error(json.error || "Network response error");
+      }
+      const json = await response.json();
+      if (response.ok) {
+        setName("");
+        setUrl("");
+        setStack("");
+        setFeatures("");
+        setGithubUrl("");
+        setImage(null);
+        setMemories([json, ...memories]);
+        setEmptyFields([]);
+        setError(null);
+      }
+    } catch (error) {
+      setError("Error creating Memory: " + error.message);
     }
+  };
 
-    return (
-        <>
-        
-        <form className='create' onSubmit={createMemory} >
-            <div className="form">
-                <h3>Add to My Brain</h3>
+  return (
+    <>
+      <form className="create" onSubmit={createMemory}>
+        <div className="form">
+          <p>Add to My Brain</p>
 
-                <label>Name</label>
-                <input
-                    type="text"
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                    className={emptyFields.includes('name') ? 'error' : ""}
-                />
+          <input
+            type="text"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            className={emptyFields.includes("name") ? "error" : ""}
+            placeholder="Add Name"
+          />
 
-                <label>Project URL</label>
-                <input
-                    type="text"
-                    onChange={(e) => setUrl(e.target.value)}
-                    value={url}
-                    className={emptyFields.includes('url') ? 'error' : " "}
-                />
+          <input
+            type="text"
+            onChange={(e) => setUrl(e.target.value)}
+            value={url}
+            className={emptyFields.includes("url") ? "error" : " "}
+            placeholder="Memory URL"
+            required
+          />
 
-                <label>Tech</label>
-                <input
-                    type="text"
-                    onChange={(e) => setStack(e.target.value)}
-                    value={stack}
-                    className={emptyFields.includes('stack') ? 'error' : " "}
-                />
+          <input
+            type="text"
+            onChange={(e) => setStack(e.target.value)}
+            value={stack}
+            className={emptyFields.includes("stack") ? "error" : " "}
+            placeholder="Search term"
+            required
+          />
 
-                <label>Notes</label>
-                <input
-                    type="text"
-                    onChange={(e) => setFeatures(e.target.value)}
-                    value={features}
-                    className={emptyFields.includes('features') ? 'error' : " "}
-                />
+          <input
+            type="text"
+            onChange={(e) => setFeatures(e.target.value)}
+            value={features}
+            className={emptyFields.includes("features") ? "error" : " "}
+            placeholder="Notes"
+          />
 
-                <label>Github URL</label>
-                <input
-                    type="text"
-                    onChange={(e) => setGithubUrl(e.target.value)}
-                    value={githubUrl}
-                    className={emptyFields.includes('githubUrl') ? 'error' : " "}
-                />
+          <input
+            type="text"
+            onChange={(e) => setGithubUrl(e.target.value)}
+            value={githubUrl}
+            className={emptyFields.includes("githubUrl") ? "error" : " "}
+            placeholder="GitHub URL"
+          />
 
-                <label form='imgUpload'>Upload Image</label>
-                <input
-                    type="file"
-                    id="imageUpload"
-                    name="file"
-                    onChange={(e) => setImage(e.target.files[0])}
-                    className={emptyFields.includes('image') ? 'error' : " "}
-                />
-                <button type='submit'>Add Memory</button>
-                {error && <div className='error'>{error}</div>}
-            </div>
-        </form>
-        </>
-    )
+          <label form="imgUpload"></label>
+          <input
+            type="file"
+            id="imageUpload"
+            name="file"
+            onChange={(e) => setImage(e.target.files[0])}
+            className={emptyFields.includes("image") ? "error" : " "}
+            placeholder="Upload Image"
+          />
+          <button type="submit">Add Memory</button>
+          {error && <div className="error">{error}</div>}
+        </div>
+      </form>
+    </>
+  );
 }
 
-export default MemoryForm
+export default MemoryForm;

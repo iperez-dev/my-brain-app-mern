@@ -1,3 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------CSS----------------------------------------------------*/
 /* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
@@ -27,16 +65,16 @@ header a {
   text-decoration: none;
 }
 .pages{
-  max-width: 1400px;
-  padding: 20px;
   margin: 0 auto;
 }
 
 /* homepage */
 .home {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
+  display: flex;
   gap: 100px;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
 }
 .memory-details {
   background: #fff;
@@ -45,8 +83,10 @@ header a {
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
-  display: grid;
+  display: flex;
   grid-template-columns: 1.5fr 3fr;
+  width: 100%;
+  
 }
 .memory-details h4 {
   margin: 0 0 10px 0;
@@ -67,8 +107,17 @@ header a {
   padding: 6px;
   border-radius: 50%;
   color: #333;
+  
 }
 
+.memory-card-container{
+  width: 40%;
+}
+
+.card-container{
+  padding: 0.7rem;
+  width: 60%;
+}
 
 /* new memory form */
 label, input {
@@ -188,4 +237,14 @@ nav button {
   cursor: pointer;
   font-size: 1em;
   margin-left: 10px;
+}
+
+.border-color1{
+  border: 2px red solid;
+}
+.border-color2{
+  border: 2px green solid;
+}
+.border-color3{
+  border: 2px blue solid;
 }
