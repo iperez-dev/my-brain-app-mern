@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
 import { GlobalContext } from "../context/globalContext"
 import { useParams } from "react-router-dom" 
-import { useAuthContext } from '../hooks/useAuthContext';
 
 function MemoryForm() {   
     const [name, setName] = useState('');
@@ -11,14 +10,9 @@ function MemoryForm() {
     const [emptyFields, setEmptyFields] = useState([]);
     const { workouts, setWorkouts } = useContext(GlobalContext);
     const { id } = useParams();
-    const { user } = useAuthContext()
 
     const updateWorkout = async (e) => {
         // e.preventDefault();
-        
-        if (!user) {
-            return
-        }
 
          // Create an object to hold the fields to update
          const updatedFields = {};
@@ -29,10 +23,6 @@ function MemoryForm() {
         try {
             const response = await fetch(`http://localhost:8000/api/workouts/${id}`, {
                 method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    'Authorization': `Bearer ${user.token}`
-                },
                 body: JSON.stringify(updatedFields)
             });
 

@@ -5,9 +5,8 @@ const cloudinary = require("../middleware/cloudinary")
 
 //GET - get all workouts - find()
 const getWorkouts = async (req, res) => {
-  const user_id = req.user._id
 
-  const workouts = await Workout.find({ user_id }).sort({ createdAt: -1 });
+  const workouts = await Workout.find().sort({ createdAt: -1 });
   try {
     res.status(200).json(workouts);
   } catch (error) {
@@ -35,13 +34,11 @@ const createWorkout = async (req, res) => {
       return res.status(400).json({ error: 'No file uploaded' });
     }
     const result = await cloudinary.uploader.upload(req.file.path);
-    // const user_id = req.user._id
     const workout = await Workout.create({
       name: req.body.name,
       stack: req.body.stack,
       features: req.body.features,
       url: req.body.url,
-      user_id: req.user._id,
       githubUrl: req.body.githubUrl,
       image: result.secure_url,
       cloudinaryId: result.public_id,

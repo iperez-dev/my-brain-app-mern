@@ -1,23 +1,17 @@
 import { createContext, useState, useEffect } from 'react'
-import { useAuthContext } from "../hooks/useAuthContext";
 
 export const GlobalContext = createContext(null)
 
 export default function GlobalState({ children }) {
     const [workouts, setWorkouts] = useState([])
     const [query, setQuery] = useState("")
-    const { user } = useAuthContext()
 
 
     // GET ALL
     useEffect(() => {
         const fetchWorkouts = async () => {
             try {
-                const response = await fetch("http://localhost:8000/api/workouts", {
-                    headers: {
-                        'Authorization': `Bearer ${user.token}`
-                    }
-                })
+                const response = await fetch("http://localhost:8000/api/workouts")
                 if (!response.ok) {
                     throw new Error("Network response error" + json.error)
                 }
@@ -27,11 +21,10 @@ export default function GlobalState({ children }) {
                 throw new Error("Network error fetching workouts: " + error.message)
             }
         }
-        if (user){
-            fetchWorkouts()
-        }
+        fetchWorkouts()
         
-    }, [user])
+        
+    }, [])
 
 
     //SET QUERY VALUE

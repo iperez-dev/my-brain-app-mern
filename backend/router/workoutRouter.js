@@ -1,6 +1,5 @@
 const express = require('express')
 const upload = require('../middleware/multer')
-const requireAuth = require('../middleware/requireAuth')
 
 const {
     getWorkouts,
@@ -12,9 +11,6 @@ const {
 
 //router
 const router = express.Router()
-
-//require auth for all workouts routes
-router.use(requireAuth)
 
 //GET all workouts
 router.get('/', getWorkouts)

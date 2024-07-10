@@ -2,7 +2,6 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require("mongoose")
 const workoutRoutes = require('./router/workoutRouter')
-const userRoutes = require('./router/userRouter')
 const cors = require('cors')
 const multer = require("multer")
 
@@ -24,7 +23,6 @@ app.use((req, res, next) => {
 
 // API Route
 app.use('/api/workouts', workoutRoutes)
-app.use('/api/user', userRoutes)
 
 
 //MongoDB
