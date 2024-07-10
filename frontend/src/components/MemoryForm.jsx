@@ -26,7 +26,7 @@ function MemoryForm() {
             formData.append('githubUrl', githubUrl);
             if (image) { formData.append('image', image); }
 
-            const response = await fetch('http://localhost:8000/api/workouts', {
+            const response = await fetch('http://localhost:8000/api/memories', {
                 method: "POST",
                 body: formData,
                 

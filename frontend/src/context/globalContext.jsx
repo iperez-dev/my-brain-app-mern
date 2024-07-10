@@ -11,7 +11,7 @@ export default function GlobalState({ children }) {
     useEffect(() => {
         const fetchWorkouts = async () => {
             try {
-                const response = await fetch("http://localhost:8000/api/workouts")
+                const response = await fetch("http://localhost:8000/api/memories")
                 if (!response.ok) {
                     throw new Error("Network response error" + json.error)
                 }
