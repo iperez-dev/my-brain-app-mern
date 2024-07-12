@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { GlobalContext } from "../context/globalContext"
 import { useParams } from "react-router-dom" 
+import { Link } from 'react-router-dom';
 
 function MemoryForm() {   
     const [name, setName] = useState('');
@@ -55,30 +56,35 @@ function MemoryForm() {
         <>
         <form className='create'  onSubmit={updateMemory} >
             <div className="form">
-                <h3>Edit Memory</h3>
+                <a href="/"><h1>My Brain</h1></a>
+                
+                <h1>Edit Memory</h1>
 
-                <label>Name</label>
+             
                 <input
                     type="text"
                     onChange={(e) => setName(e.target.value)}
                     value={name}
                     className={emptyFields.includes('name') ? 'error' : ""}
+                    placeholder='Name'
                 />
 
-                <label>Stack</label>
+              
                 <input
                     type="text"
                     onChange={(e) => setStack(e.target.value)}
                     value={stack}
                     className={emptyFields.includes('stack') ? 'error' : " "}
+                    placeholder='Stack'
                 />
 
-                <label>Notes</label>
+                
                 <input
                     type="text"
                     onChange={(e) => setFeatures(e.target.value)}
                     value={features}
                     className={emptyFields.includes('features') ? 'error' : " "}
+                    placeholder='Notes'
                 />
 
                 <button type='submit'>Submit Change</button>

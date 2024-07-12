@@ -39,8 +39,11 @@ const Memory = () => {
     : "Invalid date";
 
   return (
-    <div className="home">
-      <div className="memory-card">
+    
+    <div className=" flex flex-col md:flex-row h-auto w-[85%] mx-auto my-8 ">
+
+      {/* left-column */}
+      <div className="w-12/12 md:w-8/12 h-full bg-white rounded-lg shadow p-8">
         {embedUrl && (
           <div className="video-wrapper">
             <iframe
@@ -52,20 +55,24 @@ const Memory = () => {
             ></iframe>
           </div>
         )}
-
-        <h2>{memoryData.name}</h2>
-        <p>
-          <strong>Stack: </strong> {memoryData.stack}
-        </p>
-        <p>
-          <strong>Notes: </strong> {memoryData.features}
-        </p>
-        <Link to={memoryData.githubUrl} target="_blank">
-          <strong>Github </strong>
-        </Link>
-        <p>{formattedDate}</p>
-        <div className="card-description"></div>
+        <div className="">
+          <h2>{memoryData.name}</h2>
+          <p>
+            <strong>Keyword: </strong> {memoryData.stack}
+          </p>
+          <p>
+            <strong>Notes: </strong> {memoryData.features}
+          </p>
+          <Link to={memoryData.githubUrl} target="_blank">
+            <strong>Github </strong>
+          </Link>
+          <p>{formattedDate}</p>
+          <div className="card-description"></div>
+        </div>
       </div>
+
+      {/* right-column */}
+      
 
       <EditBar />
     </div>

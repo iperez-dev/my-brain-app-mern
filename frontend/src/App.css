@@ -3,7 +3,15 @@
 @tailwind utilities;
 
 
-
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  background: #000;
+  margin-bottom: 20px;
+}
 
 
 
@@ -199,15 +207,7 @@ nav button {
   max-width: 1080px;
   height: auto; /* Maintain aspect ratio */
 }
-.video-wrapper {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
-  height: 0;
-  overflow: hidden;
-  max-width: 100%;
-  background: #000;
-  margin-bottom: 20px;
-}
+
 
 .video-wrapper iframe {
   position: absolute;
