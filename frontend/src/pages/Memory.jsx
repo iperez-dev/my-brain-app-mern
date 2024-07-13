@@ -1,8 +1,10 @@
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import EditBar from "../components/sidebar/EditBar";
 import { formatDistance } from "date-fns";
+import Axios from "axios";
 
 const Memory = () => {
   const [memoryData, setMemoryData] = useState([]);
@@ -11,12 +13,10 @@ const Memory = () => {
   useEffect(() => {
     const handleMemoryList = async () => {
       try {
-        const response = await fetch(
-          `https://my-brain-app-mern-backend.onrender.com/api/memories/${id}`,
-          {}
+        const response = await Axios.get(
+          `https://my-brain-app-mern-backend.onrender.com/api/memories/${id}`
         );
-        const data = await response.json();
-        setMemoryData(data);
+        setMemoryData(response.data);
       } catch (error) {
         console.error(error);
       }
@@ -39,9 +39,7 @@ const Memory = () => {
     : "Invalid date";
 
   return (
-    
-    <div className=" flex flex-col md:flex-row h-auto w-[85%] mx-auto my-8 ">
-
+    <div className="flex flex-col md:flex-row h-auto w-[85%] mx-auto my-8">
       {/* left-column */}
       <div className="w-12/12 md:w-8/12 h-full bg-white rounded-lg shadow p-8">
         {embedUrl && (
@@ -55,7 +53,7 @@ const Memory = () => {
             ></iframe>
           </div>
         )}
-        <div className="">
+        <div>
           <h2>{memoryData.name}</h2>
           <p>
             <strong>Keyword: </strong> {memoryData.stack}
@@ -72,8 +70,6 @@ const Memory = () => {
       </div>
 
       {/* right-column */}
-      
-
       <EditBar />
     </div>
   );

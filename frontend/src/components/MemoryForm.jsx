@@ -1,5 +1,7 @@
+
 import { useContext, useState } from "react";
 import { GlobalContext } from "../context/globalContext";
+import Axios from "axios";
 
 function MemoryForm() {
   const [name, setName] = useState("");
@@ -28,27 +30,17 @@ function MemoryForm() {
         formData.append("image", image);
       }
 
-      const response = await fetch("https://my-brain-app-mern-backend.onrender.com/api/memories", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await Axios.post("https://my-brain-app-mern-backend.onrender.com/api/memories", formData);
 
-      if (!response.ok) {
-        const json = await response.json();
-        throw new Error(json.error || "Network response error");
-      }
-      const json = await response.json();
-      if (response.ok) {
-        setName("");
-        setUrl("");
-        setStack("");
-        setFeatures("");
-        setGithubUrl("");
-        setImage(null);
-        setMemories([json, ...memories]);
-        setEmptyFields([]);
-        setError(null);
-      }
+      setName("");
+      setUrl("");
+      setStack("");
+      setFeatures("");
+      setGithubUrl("");
+      setImage(null);
+      setMemories([response.data, ...memories]);
+      setEmptyFields([]);
+      setError(null);
     } catch (error) {
       setError("Error creating Memory: " + error.message);
     }

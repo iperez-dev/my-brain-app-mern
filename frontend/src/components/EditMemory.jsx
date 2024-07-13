@@ -1,8 +1,8 @@
 
-
 import { useContext, useState } from 'react';
 import { GlobalContext } from "../context/globalContext";
 import { useParams, Link } from "react-router-dom"; 
+import Axios from "axios"
 
 function MemoryForm() {   
     const [name, setName] = useState('');
@@ -12,9 +12,10 @@ function MemoryForm() {
     const [emptyFields, setEmptyFields] = useState([]);
     const { memories, setMemories } = useContext(GlobalContext);
     const { id } = useParams();
+    console.log(id)
 
     const updateMemory = async (e) => {
-        // e.preventDefault(); // Prevent form from submitting the traditional way
+        e.preventDefault();
 
         // Create an object to hold the fields to update
         const updatedFields = {};
@@ -53,6 +54,9 @@ function MemoryForm() {
             setFeatures('');
             setError(null);
             setEmptyFields([]);
+
+            // Reload the page
+            window.location.reload();
 
         } catch (error) {
             console.error('Update error:', error);
