@@ -11,7 +11,7 @@ export default function GlobalState({ children }) {
     useEffect(() => {
         const fetchMemories = async () => {
             try {
-                const response = await fetch("http://localhost:8000/api/memories")
+                const response = await fetch("https://my-brain-app-mern-backend.onrender.com/api/memories")
                 if (!response.ok) {
                     throw new Error("Network response error" + json.error)
                 }

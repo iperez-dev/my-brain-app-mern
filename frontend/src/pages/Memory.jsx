@@ -12,7 +12,7 @@ const Memory = () => {
     const handleMemoryList = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/memories/${id}`,
+          `https://my-brain-app-mern-backend.onrender.com/api/memories/${id}`,
           {}
         );
         const data = await response.json();

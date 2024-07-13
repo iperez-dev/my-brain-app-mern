@@ -28,7 +28,7 @@ function MemoryForm() {
         formData.append("image", image);
       }
 
-      const response = await fetch("http://localhost:8000/api/memories", {
+      const response = await fetch("https://my-brain-app-mern-backend.onrender.com/api/memories", {
         method: "POST",
         body: formData,
       });

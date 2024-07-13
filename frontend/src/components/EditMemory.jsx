@@ -23,7 +23,7 @@ function MemoryForm() {
         if (features) updatedFields.features = features;
 
         try {
-            const response = await fetch(`http://localhost:8000/api/memories/${id}`, {
+            const response = await fetch(`https://my-brain-app-mern-backend.onrender.com/api/memories/${id}`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json'
