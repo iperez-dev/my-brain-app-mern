@@ -16,29 +16,27 @@ function MemoryForm() {
 
     const updateMemory = async (e) => {
         e.preventDefault();
-
+    
         // Create an object to hold the fields to update
         const updatedFields = {};
         if (name) updatedFields.name = name;
         if (stack) updatedFields.stack = stack;
         if (features) updatedFields.features = features;
-
+    
         try {
-            const response = await fetch(`https://my-brain-app-mern-backend.onrender.com/api/memories/${id}`, {
-                method: "PUT",
+            const response = await Axios.put(`https://my-brain-app-mern-backend.onrender.com/api/memories/${id}`, updatedFields, {
                 headers: {
                     'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(updatedFields)
+                }
             });
-
-            if (!response.ok) {
+    
+            if (response.status !== 200) {
                 throw new Error('Failed to update memory');
             }
-
-            const updatedMemory = await response.json();
+    
+            const updatedMemory = response.data;
             console.log(updatedMemory);
-
+    
             // Update local state with the updated Memory
             const updatedMemories = memories.map(memory => {
                 if (memory._id === updatedMemory._id) {
@@ -47,17 +45,17 @@ function MemoryForm() {
                 return memory;
             });
             setMemories(updatedMemories);
-
+    
             // Reset form fields and error state
             setName('');
             setStack('');
             setFeatures('');
             setError(null);
             setEmptyFields([]);
-
-            // Reload the page
+    
+            // Optionally, you may not need to reload the page
             window.location.reload();
-
+    
         } catch (error) {
             console.error('Update error:', error);
             setError('Error updating Memory: ' + error.message);
