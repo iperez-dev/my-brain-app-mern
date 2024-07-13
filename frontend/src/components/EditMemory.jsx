@@ -1,7 +1,8 @@
+
+
 import { useContext, useState } from 'react';
-import { GlobalContext } from "../context/globalContext"
-import { useParams } from "react-router-dom" 
-import { Link } from 'react-router-dom';
+import { GlobalContext } from "../context/globalContext";
+import { useParams, Link } from "react-router-dom"; 
 
 function MemoryForm() {   
     const [name, setName] = useState('');
@@ -13,21 +14,29 @@ function MemoryForm() {
     const { id } = useParams();
 
     const updateMemory = async (e) => {
-        // e.preventDefault();
+        // e.preventDefault(); // Prevent form from submitting the traditional way
 
-         // Create an object to hold the fields to update
-         const updatedFields = {};
-         if (name) updatedFields.name = name;
-         if (stack) updatedFields.stack = stack;
-         if (features) updatedFields.features = features;
+        // Create an object to hold the fields to update
+        const updatedFields = {};
+        if (name) updatedFields.name = name;
+        if (stack) updatedFields.stack = stack;
+        if (features) updatedFields.features = features;
 
         try {
             const response = await fetch(`http://localhost:8000/api/memories/${id}`, {
                 method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body: JSON.stringify(updatedFields)
             });
 
+            if (!response.ok) {
+                throw new Error('Failed to update memory');
+            }
+
             const updatedMemory = await response.json();
+            console.log(updatedMemory);
 
             // Update local state with the updated Memory
             const updatedMemories = memories.map(memory => {
@@ -51,16 +60,14 @@ function MemoryForm() {
         }
     }
 
-
     return (
         <>
-        <form className='create'  onSubmit={updateMemory} >
+        <form className='create' onSubmit={updateMemory}>
             <div className="form">
-                <a href="/"><h1>My Brain</h1></a>
+                <Link to="/"><h1>My Brain</h1></Link>
                 
                 <h1>Edit Memory</h1>
 
-             
                 <input
                     type="text"
                     onChange={(e) => setName(e.target.value)}
@@ -69,21 +76,19 @@ function MemoryForm() {
                     placeholder='Name'
                 />
 
-              
                 <input
                     type="text"
                     onChange={(e) => setStack(e.target.value)}
                     value={stack}
-                    className={emptyFields.includes('stack') ? 'error' : " "}
+                    className={emptyFields.includes('stack') ? 'error' : ""}
                     placeholder='Stack'
                 />
 
-                
                 <input
                     type="text"
                     onChange={(e) => setFeatures(e.target.value)}
                     value={features}
-                    className={emptyFields.includes('features') ? 'error' : " "}
+                    className={emptyFields.includes('features') ? 'error' : ""}
                     placeholder='Notes'
                 />
 
@@ -91,11 +96,8 @@ function MemoryForm() {
                 {error && <div className='error'>{error}</div>}
             </div>
         </form>
-        <form action="">
-            
-        </form>
         </>
     )
 }
 
-export default MemoryForm
+export default MemoryForm;
