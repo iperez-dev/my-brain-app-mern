@@ -91,7 +91,7 @@ function MemoryForm() {
             onChange={(e) => setFeatures(e.target.value)}
             value={features}
             className={emptyFields.includes("features") ? "error" : " "}
-            placeholder="Notes"
+            placeholder="Note"
           />
 
           <input
