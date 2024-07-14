@@ -1,7 +1,7 @@
+// Dependencies
 import MemoryCard from "../components/MemoryCard";
 import { useContext } from "react";
 import { GlobalContext } from "../context/globalContext";
-import Sidebar from "../components/sidebar/Sidebar";
 import SearchBar from "../components/SearchBar";
 import MemoryForm from "../components/MemoryForm";
 
@@ -49,7 +49,6 @@ function Home() {
         </div>
         {/* right-column */}
         <div className="right-column w-[90%] md:w-[40%] flex mt-10 mx-auto">
-          {/* <Sidebar /> */}
           <div className="md:fixed md:px-16 w-[100%] md:w-[34%]">
             <h1>My Brain</h1>
             <SearchBar />

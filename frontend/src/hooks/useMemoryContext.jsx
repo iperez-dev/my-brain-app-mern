@@ -1,3 +1,4 @@
+// Dependencies
 import { GlobalContext } from '../context/globalContext'
 import { useContext } from 'react'
 

@@ -1,4 +1,4 @@
-
+// DEPENDENCIES
 import { useContext, useState } from "react";
 import { GlobalContext } from "../context/globalContext";
 import Axios from "axios";
@@ -15,11 +15,12 @@ function MemoryForm() {
 
   const { memories, setMemories } = useContext(GlobalContext);
 
-  //POST
+  // SENDS POST REQUEST
   const createMemory = async (e) => {
     e.preventDefault();
 
     try {
+      // Create FormData object and appends form input values
       const formData = new FormData();
       formData.append("name", name);
       formData.append("url", url);
@@ -30,17 +31,28 @@ function MemoryForm() {
         formData.append("image", image);
       }
 
-      const response = await Axios.post("https://my-brain-app-mern-backend.onrender.com/api/memories", formData);
+      // Post request with FormData values
+      const response = await Axios.post(
+        "https://my-brain-app-mern-backend.onrender.com/api/memories",
+        formData
+      );
 
+      // Empty form fields once the from submits
       setName("");
       setUrl("");
       setStack("");
       setFeatures("");
       setGithubUrl("");
       setImage(null);
-      setMemories([response.data, ...memories]);
       setEmptyFields([]);
       setError(null);
+      // Adds new memory to memory list. Update local state
+      setMemories([response.data, ...memories]);
+
+      // Handles error
+      if (response.status !== 200) {
+        throw new Error("Failed to fetch data on try{} block");
+      }
     } catch (error) {
       setError("Error creating Memory: " + error.message);
     }
@@ -48,10 +60,12 @@ function MemoryForm() {
 
   return (
     <>
+      <p>Add to My Brain</p>
+      {/* form */}
       <form className="create" onSubmit={createMemory}>
         <div className="form">
-          <p>Add to My Brain</p>
 
+          {/* Name */}
           <input
             type="text"
             onChange={(e) => setName(e.target.value)}
@@ -60,6 +74,7 @@ function MemoryForm() {
             placeholder="Add Name"
           />
 
+          {/* video URL */}
           <input
             type="text"
             onChange={(e) => setUrl(e.target.value)}
@@ -69,6 +84,7 @@ function MemoryForm() {
             required
           />
 
+          {/* Search Term */}
           <input
             type="text"
             onChange={(e) => setStack(e.target.value)}
@@ -78,14 +94,16 @@ function MemoryForm() {
             required
           />
 
+          {/* Notes */}
           <input
             type="text"
             onChange={(e) => setFeatures(e.target.value)}
             value={features}
             className={emptyFields.includes("features") ? "error" : " "}
-            placeholder="Note"
+            placeholder="Notes"
           />
 
+          {/* GitHub URL */}
           <input
             type="text"
             onChange={(e) => setGithubUrl(e.target.value)}
@@ -94,6 +112,7 @@ function MemoryForm() {
             placeholder="GitHub URL"
           />
 
+          {/* Image upload */}
           <label form="imgUpload"></label>
           <input
             type="file"
@@ -103,8 +122,11 @@ function MemoryForm() {
             className={emptyFields.includes("image") ? "error" : " "}
             placeholder="Upload Image"
           />
+
+          {/* Submit buttom */}
           <button type="submit">Add Memory</button>
           {error && <div className="error">{error}</div>}
+          
         </div>
       </form>
     </>

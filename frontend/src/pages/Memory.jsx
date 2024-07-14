@@ -11,7 +11,7 @@ const Memory = () => {
   // Get id out off URL
   const { id } = useParams();
 
-  // Get request to api endpoint for single memory
+  // Fetch single memory
   useEffect(() => {
     const handleMemoryList = async () => {
       try {
