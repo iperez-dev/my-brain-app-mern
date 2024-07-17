@@ -1,7 +1,7 @@
 // Dependencies
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import EditBar from "../components/sidebar/EditBar";
+import EditMemory from "../components/EditMemory";
 import { formatDistance } from "date-fns";
 import Axios from "axios";
 
@@ -90,7 +90,7 @@ const Memory = () => {
           </div>
         </div>
         {/* right-column */}
-        <EditBar />
+        <EditMemory />
       </div>
     </>
   );

@@ -37,12 +37,6 @@
 
 
 
-
-
-
-
-
-
 /* ------------------------------------------------------CSS----------------------------------------------------*/
 /* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
@@ -52,6 +46,7 @@
   --primary: #1aac83;
   --error: #e7195a;
 }
+
 body {
   background: #f1f1f1;
   margin: 0;
@@ -74,57 +69,6 @@ header a {
 }
 .pages{
   margin: 0 auto;
-}
-
-/* homepage */
-.home {
-  display: flex;
-  gap: 100px;
-  width: 100%;
-  height: 100vh;
-  justify-content: center;
-}
-.memory-details {
-  background: #fff;
-  border-radius: 4px;
-  margin: 20px auto;
-  padding: 20px;
-  position: relative;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
-  display: flex;
-  grid-template-columns: 1.5fr 3fr;
-  width: 100%;
-  
-}
-.memory-details h4 {
-  margin: 0 0 10px 0;
-  font-size: 1.2em;
-  color: var(--primary);
-}
-.memory-details p {
-  margin: 0;
-  font-size: 0.9em;
-  color: #555;
-}
-.memory-details span {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  cursor: pointer;
-  background: #f1f1f1;
-  padding: 6px;
-  border-radius: 50%;
-  color: #333;
-  
-}
-
-.memory-card-container{
-  width: 40%;
-}
-
-.card-container{
-  padding: 0.7rem;
-  width: 60%;
 }
 
 /* new memory form */
@@ -171,26 +115,7 @@ a {
 .card-image {
   width: 100%;
   max-width: 280px;
-  height: auto; /* Maintain aspect ratio */
-}
-
-/* navbar */
-nav {
-  display: flex;
-  align-items: center;
-}
-nav a {
-  margin-left: 10px;
-}
-nav button {
-  background: #fff;
-  color: var(--primary);
-  border: 2px solid var(--primary);
-  padding: 6px 10px;
-  border-radius: 4px;
-  font-family: "Poppins";
-  cursor: pointer;
-  font-size: 1em;
+  height: auto; 
 }
 
 /* Memory Card */
@@ -205,7 +130,7 @@ nav button {
 .memory-image {
   width: 100%;
   max-width: 1080px;
-  height: auto; /* Maintain aspect ratio */
+  height: auto; 
 }
 
 
@@ -217,34 +142,4 @@ nav button {
   height: 100%;
   border: 0;
 }
-/* auth forms */
-form.signup, form.login {
-  max-width: 400px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 4px;
-}
-
-/* nav button */
-nav button {
-  background: #fff;
-  color: var(--primary);
-  border: 2px solid var(--primary);
-  padding: 6px 10px;
-  border-radius: 4px;
-  font-family: "Poppins";
-  cursor: pointer;
-  font-size: 1em;
-  margin-left: 10px;
-}
-
-.border-color1{
-  border: 2px red solid;
-}
-.border-color2{
-  border: 2px green solid;
-}
-.border-color3{
-  border: 2px blue solid;
-}
+  

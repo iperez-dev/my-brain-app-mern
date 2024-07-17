@@ -1,8 +1,9 @@
-
+// DEPENDENCIES
 import { useContext, useState } from 'react';
 import { GlobalContext } from "../context/globalContext";
 import { useParams, Link } from "react-router-dom"; 
 import Axios from "axios"
+
 
 function MemoryForm() {   
     const [name, setName] = useState('');
@@ -64,40 +65,47 @@ function MemoryForm() {
 
     return (
         <>
-        <form className='create' onSubmit={updateMemory}>
-            <div className="form">
-                <Link to="/"><h1>My Brain</h1></Link>
-                
+            <div className='w-12/12 md:w-4/12 md:pl-[3rem] h-full' >
+            <Link to="/"><h1>My Brain</h1></Link>
                 <h1>Edit Memory</h1>
 
-                <input
-                    type="text"
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                    className={emptyFields.includes('name') ? 'error' : ""}
-                    placeholder='Name'
-                />
+                <form className='create' onSubmit={updateMemory}>
+                    <div className="form">
 
-                <input
-                    type="text"
-                    onChange={(e) => setStack(e.target.value)}
-                    value={stack}
-                    className={emptyFields.includes('stack') ? 'error' : ""}
-                    placeholder='Stack'
-                />
+                        {/* Name */}
+                        <input
+                            type="text"
+                            onChange={(e) => setName(e.target.value)}
+                            value={name}
+                            className={emptyFields.includes('name') ? 'error' : ""}
+                            placeholder='Name'
+                        />
 
-                <input
-                    type="text"
-                    onChange={(e) => setFeatures(e.target.value)}
-                    value={features}
-                    className={emptyFields.includes('features') ? 'error' : ""}
-                    placeholder='Notes'
-                />
+                        {/* Search Term */}
+                        <input
+                            type="text"
+                            onChange={(e) => setStack(e.target.value)}
+                            value={stack}
+                            className={emptyFields.includes('stack') ? 'error' : ""}
+                            placeholder='Stack'
+                        />
 
-                <button type='submit'>Submit Change</button>
-                {error && <div className='error'>{error}</div>}
+                        {/* Notes */}
+                        <input
+                            type="text"
+                            onChange={(e) => setFeatures(e.target.value)}
+                            value={features}
+                            className={emptyFields.includes('features') ? 'error' : ""}
+                            placeholder='Notes'
+                        />
+
+                        {/* Submit button */}
+                        <button type='submit'>Submit Change</button>
+                        {error && <div className='error'>{error}</div>}
+                    </div>
+                </form>
             </div>
-        </form>
+       
         </>
     )
 }
